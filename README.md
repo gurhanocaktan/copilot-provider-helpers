@@ -30,7 +30,7 @@ How it works
 - For Ollama, `use-ollama` queries the local Ollama API (`http://localhost:11434/api/tags`) to discover model names.
 - For NVIDIA, the script uses a curated list and lets you choose or enter a model manually.
 
-Demo commands (good for video description)
+Demo commands
 ```bash
 source ~/.bashrc
 use-ollama            # interactive Ollama model menu
@@ -41,16 +41,5 @@ copilot-status
 cat ~/.copilot-provider-config
 ```
 
-Security
-- Do NOT commit real API keys into public repos or share dotfiles with secrets. Replace keys with placeholders or use a secure secrets manager.
-
-Tips for publishing
-- Add this README to your GitHub repo and include the `copilot-providers` script at the repo root so viewers can `curl` or `git clone`.
-- In your video description, paste the Quick install and Demo sections.
-
 License
 - MIT
-
----
-
-If you want, I can also create a `README.md` in a new GitHub repo (or initialize a local Git repo and make a first commit). Which would you prefer?
