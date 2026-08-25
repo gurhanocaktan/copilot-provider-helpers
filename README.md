@@ -5,14 +5,14 @@ Small shell helpers to switch the GitHub Copilot CLI between providers (local Ol
 This repo contains a single helper script intended to live in `~/.bashrc.d/` and loaded from `~/.bashrc`.
 
 Files
-- `copilot-providers` — bash helper (place it in `~/.bashrc.d/` and make executable).
+- `copilot-providers.sh` — bash helper (place it in `~/.bashrc.d/` and make executable).
 
 Quick install
 ```bash
 # copy the script into place
 mkdir -p ~/.bashrc.d
-cp copilot-providers ~/.bashrc.d/copilot-providers
-chmod +x ~/.bashrc.d/copilot-providers
+cp copilot-providers.sh ~/.bashrc.d/copilot-providers.sh
+chmod +x ~/.bashrc.d/copilot-providers.sh
 # ensure your ~/.bashrc sources ~/.bashrc.d/* (most distros do)
 source ~/.bashrc
 ```
