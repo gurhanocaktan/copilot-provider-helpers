@@ -6,6 +6,15 @@
 
 COPILOT_CONFIG_FILE="$HOME/.copilot-provider-config"
 
+# Known NVIDIA models (single source of truth)
+NVIDIA_MODELS=(
+    "meta/llama-3.3-70b-instruct"
+    "meta/llama-3.2-3b-instruct"
+    "meta/llama-3.2-1b-instruct"
+    "meta/llama-3.1-79b-instruct"
+    "meta/llama-3.1-8b-instruct"
+    "qwen/qwen3-coder-480b-a35b-instruct"
+)
 # Initialize config with placeholders if it doesn't exist
 if [[ ! -f "$COPILOT_CONFIG_FILE" ]]; then
     cat > "$COPILOT_CONFIG_FILE" << 'EOFCONFIG'
@@ -71,16 +80,9 @@ use-nvidia() {
     if [[ -n "$1" ]]; then
         model="$1"
     else
-        # Show NVIDIA models menu
+        # Show NVIDIA models menu (use centralized list)
         echo "Available NVIDIA NIM Models:"
-        local -a models=(
-            "meta/llama-3.3-70b-instruct"
-            "meta/llama-3.2-3b-instruct"
-            "meta/llama-3.2-1b-instruct"
-            "meta/llama-3.1-79b-instruct"
-            "meta/llama-3.1-8b-instruct"
-            "qwen/qwen3-coder-480b-a35b-instruct"
-        )
+        local -a models=("${NVIDIA_MODELS[@]}")
 
         PS3="Select model (number): "
         select choice in "${models[@]}" "Other (manual entry)" "Cancel"; do
@@ -130,15 +132,13 @@ copilot-status() {
 # Show available NVIDIA models
 nvidia-models() {
     echo "Available NVIDIA NIM Models:"
-    echo "  1) meta/llama-3.3-70b-instruct"
-    echo "  2) meta/llama-3.2-3b-instruct"
-    echo "  3) meta/llama-3.2-1b-instruct"
-    echo "  4) meta/llama-3.1-79b-instruct"
-    echo "  5) meta/llama-3.1-8b-instruct"
-    echo "  6) qwen/qwen3-coder-480b-a35b-instruct"
+    for i in "${!NVIDIA_MODELS[@]}"; do
+        idx=$((i+1))
+        printf "  %d) %s\n" "$idx" "${NVIDIA_MODELS[i]}"
+    done
     echo ""
     echo "Usage: use-nvidia <model_name>"
-    echo "Example: use-nvidia meta/llama-3.3-70b-instruct"
+    echo "Example: use-nvidia ${NVIDIA_MODELS[0]}"
 }
 
 # Quick provider switcher
