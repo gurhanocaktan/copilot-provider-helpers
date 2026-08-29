@@ -25,9 +25,9 @@ Usage
 - `list-ollama-models` — prints available Ollama models (uses Ollama HTTP API).
 - `copilot-status` — show current provider/model.
 - `copilot-switch` — interactive provider chooser.
+ - `use-github` — revert to GitHub-hosted Copilot (remove local BYOK config for current shell).
 
 How it works
-- The script persists the chosen provider into `~/.copilot-provider-config` and `source`s it so the `COPILOT_*` env vars apply immediately.
 - The script persists the chosen provider into `~/.copilot-provider-config` and `source`s it so the `COPILOT_*` env vars apply immediately. The config file is written atomically and is set to restricted permissions (`600`) to avoid accidental exposure of API keys.
 - When switching providers, the script will preserve an existing `COPILOT_PROVIDER_API_KEY` if present; otherwise it will write a placeholder (`<YOUR_NV_API_KEY>`) so you can replace it with a real key.
 - For Ollama, `use-ollama` queries the local Ollama API (`http://localhost:11434/api/tags`) to discover model names.
